@@ -1,121 +1,105 @@
-# 我们没有翅膀 · Apple 平台移植
+# We Have No Wings · Apple Platform Port
 
-《俺たちに翼はない》（Navel，2009）的 iPhone / iPad / Apple Vision Pro / Mac 原生移植。
+Native port of 《俺たちに翼はない》 (Navel, 2009) for iPhone / iPad / Apple Vision Pro / Mac.
 
-> **v0.1.1 预发布。** 中文版启动时直接进入游戏标题主界面，无需点击三张补丁提示图。 iPhone、iPad、Vision Pro 已实机确认中文正文、声音与推进；iPad 普通／快速存读档、Vision Pro 普通存读档、原生大按钮、回想切换和章节文字均已通过。iPhone／Vision Pro 第一段片头、iPad 第二段片头的连续画面、音乐和结束返回已通过实机确认。Mac 已验证中文开篇与发布构建的目录选择。完整角色路线尚未逐一通关，部分视觉效果仍有逆向开放问题，详见[验证记录与覆盖边界](docs/VALIDATION.md)。安装包见 [v0.1.1 Release](https://github.com/galhack/Oretsuba_iOS/releases/tag/v0.1.1)。
+> **v0.1.1 pre-release.** In the Chinese version, launching goes straight to the game title main screen, no need to click through the three patch notice images. Chinese text, sound, and progression have been confirmed on real iPhone, iPad, and Vision Pro devices; iPad normal / quick save and load, Vision Pro normal save and load, native large buttons, history toggle, and chapter text have all passed. The first opening movie on iPhone / Vision Pro, and the second opening movie on iPad — continuous video, music, and return at the end — have been confirmed on real devices. On Mac, the Chinese opening and directory selection in the release build have been verified. Full character routes have not yet all been played through one by one, and some visual effects still have open reverse-engineering issues, see [Validation Records and Coverage Limits](docs/VALIDATION.md). Install packages are in the [v0.1.1 Release](https://github.com/galhack/Oretsuba_iOS/releases/tag/v0.1.1).
 
-本项目从零重写了游戏所用的 Lucifen 引擎（脚本虚拟机、图层合成、过渡与特效、文本、界面、音频、
-片头动画、存档），在 Apple 设备上原生运行，并支持「中文三号补丁」汉化。
+This project rewrote from scratch the Lucifen engine used by the game (script virtual machine, layer compositing, transitions and effects, text, UI, audio, opening animation, saves), running natively on Apple devices, and supports the "Chinese Patch No. 3" translation.
 
-**本仓库不包含任何游戏内容。** 你需要自己购买游戏，并使用你自己的游戏文件。
+**This repository does not contain any game content.** You need to purchase the game yourself and use your own game files.
 
-## 支持的设备
+## Supported Devices
 
-| 设备 | 方式 | 构建最低系统要求 |
+| Device | Method | Minimum System Requirement for Build |
 |---|---|---|
-| iPhone、iPad | 侧载（Sideloadly 或 Xcode） | iOS / iPadOS 17 及以上 |
-| Apple Vision Pro | Xcode 签名安装原生 visionOS 应用 | visionOS 1 及以上 |
-| Mac（Apple 芯片或 Intel） | 直接运行 | macOS 14 及以上 |
+| iPhone, iPad | Sideload (Sideloadly or Xcode) | iOS / iPadOS 17 and above |
+| Apple Vision Pro | Install native visionOS app with Xcode signing | visionOS 1 and above |
+| Mac (Apple Silicon or Intel) | Run directly | macOS 14 and above |
 
-## 准备游戏文件
+## Preparing Game Files
 
-1. 游戏光盘（或光盘镜像）中的 **`SET_UP` 文件夹**，其中应包含
-   `SCRIPT.LPK`、`SYS.LPK`、`CHR.LPK`、`PIC.LPK`、`BGM.LPK`、`SE.LPK`、`VOICE.LPK`、`DATA.LPK`。
-   无需在 Windows 上安装游戏。
-2. （可选）**中文三号补丁**文件夹，其中应包含 `SCRIPT_CHS`、`SYS`、`DATA` 文件夹以及
-   `ORE_TUBA_CHS.dll`。有补丁时可在启动器中选择「简体中文」。
+1. The **`SET_UP` folder** from the game disc (or disc image), which should contain `SCRIPT.LPK`, `SYS.LPK`, `CHR.LPK`, `PIC.LPK`, `BGM.LPK`, `SE.LPK`, `VOICE.LPK`, `DATA.LPK`. No need to install the game on Windows.
+2. (Optional) **Chinese Patch No. 3** folder, which should contain the `SCRIPT_CHS`, `SYS`, `DATA` folders and `ORE_TUBA_CHS.dll`. With the patch, you can select "Simplified Chinese" in the launcher.
 
-## 安装
+## Installation
 
-### iPhone / iPad（侧载）
+### iPhone / iPad (Sideload)
 
-1. 在本仓库的 [Releases](../../releases) 页面下载最新的 `Oretsuba-iOS-unsigned.ipa`。
-2. 用数据线连接设备，打开 [Sideloadly](https://sideloadly.io/)，选择设备与 IPA，
-   填入你的 Apple ID 后点击 Start。免费 Apple ID 签名的应用 7 天后需要重新签名，
-   且同一设备最多同时安装 3 个免费签名的应用。
-3. 首次打开前，在设备「设置 › 通用 › VPN 与设备管理」中信任你的开发者证书。
-4. 如果系统要求开发者模式，在「设置 › 隐私与安全性 › 开发者模式」中启用，并按提示重启、确认。
+1. Download the latest `Oretsuba-iOS-unsigned.ipa` from the [Releases](../../releases) page of this repository.
+2. Connect the device with a cable, open [Sideloadly](https://sideloadly.io/), select the device and IPA, enter your Apple ID and click Start. Apps signed with a free Apple ID need to be re-signed after 7 days, and at most 3 free-signed apps can be installed on the same device at the same time.
+3. Before opening for the first time, trust your developer certificate in device Settings › General › VPN & Device Management.
+4. If the system requires Developer Mode, enable it in Settings › Privacy & Security › Developer Mode, and restart / confirm as prompted.
 
-免费账号的有效期与应用数量限制见 [Apple 个人团队说明](https://developer.apple.com/help/account/basics/about-your-developer-account)。
-更新或续签时，用同一个 Apple ID 和 Bundle ID 覆盖安装，保留应用及本地存档；不要先卸载。
-Sideloadly 的覆盖安装和自动续签方法见 [官方 FAQ](https://sideloadly.io/faq.html)。
+See [Apple Personal Team description](https://developer.apple.com/help/account/basics/about-your-developer-account) for the validity period and app count limits for free accounts. When updating or re-signing, overwrite-install with the same Apple ID and Bundle ID to keep the app and local saves; do not uninstall first. See [official FAQ](https://sideloadly.io/faq.html) for Sideloadly overwrite install and auto re-signing.
 
 ### Apple Vision Pro
 
-本项目在第一代 Vision Pro 上使用原生 visionOS 目标，安装方式如下：
+This project uses a native visionOS target on the first-generation Vision Pro, install as follows:
 
-1. 在 Mac 安装带 visionOS 平台组件的 Xcode，在 Settings › Accounts 登录自己的 Apple Account。
-2. 按下方「从源码构建」生成并打开工程。
-3. 在 Xcode 的设备管理中将 Vision Pro 与 Mac 配对；Xcode 27 使用 Device Hub。保持头显解锁，并按系统提示开启开发者模式。
-4. 在工程的 Signing & Capabilities 中选择自己的 Team，保持 Automatically manage signing 开启。
-5. 选择已配对的 Vision Pro 为运行目标，点击 Run。应用安装后，再按下方方法导入游戏文件。
+1. On Mac, install Xcode with the visionOS platform components, and sign in with your own Apple Account in Settings › Accounts.
+2. Generate and open the project as in "Building from Source" below.
+3. Pair Vision Pro with the Mac in Xcode device management; Xcode 27 uses Device Hub. Keep the headset unlocked, and enable Developer Mode as prompted by the system.
+4. In the project's Signing & Capabilities, select your own Team, and keep Automatically manage signing on.
+5. Select the paired Vision Pro as the run target and click Run. After the app is installed, import the game files as described below.
 
-可参考 [Apple 的实机运行说明](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices)
-和 [开发者模式说明](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device)。
-Release 中的 `Oretsuba-visionOS-unsigned.ipa` 需要另行签名，不能直接安装；目前已验证的安装方式是 Xcode，尚未验证 Sideloadly 对原生 visionOS 包的支持。
+See [Apple's on-device running instructions](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices) and [Developer Mode instructions](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device). The `Oretsuba-visionOS-unsigned.ipa` in Release needs separate signing and cannot be installed directly; the currently verified install method is Xcode, Sideloadly support for native visionOS packages has not yet been verified.
 
 ### Mac
 
-下载 `Oretsuba-macOS.zip`，解压后把 `Oretsuba.app` 拖入「应用程序」。
-首次打开时如被系统拦截，请在「系统设置 › 隐私与安全性」中点击「仍要打开」。
+Download `Oretsuba-macOS.zip`, unzip it, and drag `Oretsuba.app` into Applications. If blocked on first open, click "Open Anyway" in System Settings › Privacy & Security.
 
-## 导入游戏文件
+## Importing Game Files
 
-* **iPhone / iPad**：用数据线连接 Mac，在访达侧栏选中设备 › 「文件」标签页 ›「我们没有翅膀」，
-  把 `SET_UP` 文件夹（以及汉化补丁文件夹）拖进去。也可以先把文件夹存入「文件」App，
-  再在启动器中点「从『文件』导入文件夹…」。
-* **Vision Pro**：用隔空投送把文件夹发到 Vision Pro 并存入「文件」，再在启动器中导入。
-* **Mac**：在启动器中直接选择游戏目录与汉化补丁目录，无需复制。
+* **iPhone / iPad**: Connect the Mac with a cable, in Finder sidebar select the device › Files tab › "We Have No Wings", drag the `SET_UP` folder (and the translation patch folder) in. You can also first save the folders to the Files app, then in the launcher tap "Import Folder from Files...".
+* **Vision Pro**: AirDrop the folders to Vision Pro and save them to Files, then import in the launcher.
+* **Mac**: In the launcher, directly select the game directory and translation patch directory, no copying needed.
 
-启动器检测到文件后即可选择语言并开始游戏。
+Once the launcher detects the files, you can select the language and start the game.
 
-## 操作
+## Controls
 
-**Vision Pro**：使用游戏窗口下方的原生「保存／读取／快存／快读／回想／菜单」按钮。再次点击「回想」可关闭文本记录，正文可注视后捏合推进。
+**Vision Pro**: Use the native "Save / Load / Quick Save / Quick Load / History / Menu" buttons below the game window. Click "History" again to close the text log, look at the text then pinch to advance.
 
-| 操作 | 触控 | 鼠标 / 键盘 |
+| Action | Touch | Mouse / Keyboard |
 |---|---|---|
-| 前进 / 确定 | 轻点 | 左键、Enter |
-| 菜单 / 隐藏文本框 | 双指轻点 | 右键 |
-| 回想（文本记录） | 下拉 | 滚轮向上 |
-| 快进 | 长按 | 按住 Ctrl（或在设置中改为 Shift） |
+| Advance / Confirm | Tap | Left click, Enter |
+| Menu / Hide textbox | Two-finger tap | Right click |
+| History (text log) | Swipe down | Scroll wheel up |
+| Fast-forward | Long press | Hold Ctrl (or change to Shift in settings) |
 
-也支持游戏手柄：A 确定、B 菜单、右扳机快进、十字键上下滚动。
+Gamepad also supported: A confirm, B menu, right trigger fast-forward, D-pad up / down scroll.
 
-## 从源码构建
+## Building from Source
 
-本轮验证使用 Xcode 27.1。若系统默认指向 Command Line Tools，先在当前终端设置：
+This round of validation uses Xcode 27.1. If the system defaults to Command Line Tools, set it in the current terminal first:
 
 ```sh
 export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 ```
 
 ```sh
-ORE_TEAM=YOUR_TEAM_ID tools/apple/gen_project.sh   # 把 YOUR_TEAM_ID 换成自己的开发团队 ID
+ORE_TEAM=YOUR_TEAM_ID tools/apple/gen_project.sh   # Replace YOUR_TEAM_ID with your own development team ID
 open app/Oretsuba.xcodeproj
 ```
 
-团队 ID 可在 Xcode 的签名设置中确认。只构建 Mac 时可直接运行 `tools/apple/gen_project.sh`，无需开发团队。
-工程生成脚本使用 PATH 中的 XcodeGen；未安装时会下载固定版本到本项目忽略的 `build/tools` 目录。
+Team ID can be confirmed in Xcode signing settings. To build only Mac, you can directly run `tools/apple/gen_project.sh`, no development team needed. The project generation script uses XcodeGen in PATH; if not installed, it downloads a pinned version to this project's ignored `build/tools` directory.
 
-命令行测试宿主（macOS，无窗口运行并输出截图）：
+Command-line test host (macOS, runs without a window and outputs screenshots):
 
 ```sh
 make -C engine
-build/host/orehost --data <SET_UP 目录> --frames 1200 --shot 600,1200 --out /tmp/ore
+build/host/orehost --data <SET_UP directory> --frames 1200 --shot 600,1200 --out /tmp/ore
 ```
 
-引擎结构与逆向笔记见 `docs/ENGINE_GUIDE.md` 与 `docs/re/`。
+See `docs/ENGINE_GUIDE.md` and `docs/re/` for engine structure and reverse-engineering notes.
 
-## 致谢与许可
+## Acknowledgements and License
 
-* 游戏《俺たちに翼はない》© Navel。本项目与 Navel 无关，仅供已购买正版的玩家使用。
-* 中文汉化：中文三号补丁制作组（汉化工程 [HIllya51/ORE_TUBA_Chinese](https://github.com/HIllya51/ORE_TUBA_Chinese)）。
-* 第三方库：stb_vorbis、stb_image、stb_image_write（public domain / MIT），pl_mpeg（MIT），minimp3（CC0）。
-  LPK / ELG 格式参考了 GARbro（MIT）。
-  相关许可和署名见 [ThirdPartyNotices.txt](app/Resources/ThirdPartyNotices.txt)，也包含在应用包内。
+* Game 《俺たちに翼はない》 © Navel. This project is not affiliated with Navel, for players who have purchased the genuine game only.
+* Chinese translation: Chinese Patch No. 3 team (translation project [HIllya51/ORE_TUBA_Chinese](https://github.com/HIllya51/ORE_TUBA_Chinese)).
+* Third-party libraries: stb_vorbis, stb_image, stb_image_write (public domain / MIT), pl_mpeg (MIT), minimp3 (CC0). LPK / ELG format referenced GARbro (MIT). See [ThirdPartyNotices.txt](app/Resources/ThirdPartyNotices.txt) for related licenses and attributions, also included in the app bundle.
 
-## 本地验证与测试包
+## Local Verification and Test Packages
 
 ```sh
 make -C engine -j8 all tests
@@ -123,21 +107,27 @@ build/host/save_roundtrip /path/to/SET_UP
 build/host/quick_save /path/to/SET_UP
 build/host/command_input /path/to/SET_UP
 build/host/native_coverage /path/to/SET_UP
-build/host/native_coverage /path/to/SET_UP /path/to/中文三号补丁
+build/host/native_coverage /path/to/SET_UP /path/to/Chinese-Patch-No-3
 build/host/image_blend
-build/host/movie_flow /path/to/SET_UP /path/to/中文三号补丁
-python3 tools/test_chinese_save.py /path/to/SET_UP /path/to/中文三号补丁
-python3 tools/test_quick_save.py /path/to/SET_UP /path/to/中文三号补丁
-python3 tools/test_history_toggle.py /path/to/SET_UP /path/to/中文三号补丁
+build/host/movie_flow /path/to/SET_UP /path/to/Chinese-Patch-No-3
+python3 tools/test_chinese_save.py /path/to/SET_UP /path/to/Chinese-Patch-No-3
+python3 tools/test_quick_save.py /path/to/SET_UP /path/to/Chinese-Patch-No-3
+python3 tools/test_history_toggle.py /path/to/SET_UP /path/to/Chinese-Patch-No-3
 xcrun swiftc -module-cache-path build/swift-module-cache \
   app/Sources/App/FolderImport.swift app/Tests/FolderImportTests.swift \
   -o build/folder-import-tests
 build/folder-import-tests
-tools/apple/package.sh ios       # 未签名 IPA，供侧载工具重新签名
-tools/apple/package.sh visionos  # 未签名原生 visionOS IPA
-tools/apple/package.sh macos     # 本地 ad-hoc 签名的 Mac Catalyst 包
+tools/apple/package.sh ios       # Unsigned IPA, for sideload tools to re-sign
+tools/apple/package.sh visionos  # Unsigned native visionOS IPA
+tools/apple/package.sh macos     # Local ad-hoc signed Mac Catalyst package
 ```
 
-产物在 `build/packages/`，不包含游戏数据。未签名 IPA 不能直接通过设备安装工具安装；需由用户自己的账号签名。Mac 包尚未公证。
+Build output is in `build/packages/` and does not include game data. An unsigned IPA cannot be installed directly via device installation tools; it must be signed with the user's own account. The Mac package has not been notarized yet.
 
-维护者：galhack <galhack@protonmail.com>。
+Maintainer: galhack <galhack@protonmail.com>.
+
+## Android
+
+Min SDK 26 (Android 8+), target SDK 34, ABIs arm64-v8a + armeabi-v7a + x86_64.
+
+The APK builds without game files. Install it, then open the app and import the `SET_UP` game folder.
